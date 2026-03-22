@@ -35,14 +35,7 @@ export default function Footer() {
             <p className="text-xs leading-relaxed text-slate-400" style={{ maxWidth: '36ch' }}>
               Philippine payment gateway for GoHighLevel. Powered by Xendit&apos;s BSP-regulated infrastructure.
             </p>
-            <div className="mt-4 text-xs leading-relaxed" style={{ color: '#94a3b8' }}>
-              <p className="font-semibold text-slate-500">Tara AI Solutions Co.</p>
-              <p>3rd Floor Unit F Westgate Tower</p>
-              <p>1709 Investment Dr.</p>
-              <p>Madrigal Business Park,</p>
-              <p>Alabang Muntinlupa City, 1780</p>
-              <p>NCR, Philippines</p>
-            </div>
+
           </div>
 
           {/* Links */}
