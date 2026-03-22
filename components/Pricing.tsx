@@ -2,7 +2,6 @@ const features = [
   'Invoice Generation',
   'Funnel Checkout Pages',
   'Payment Links for Easy Transactions',
-  'Membership Access for Clients',
   'Supports One-Time and Recurring Payments',
   'All Philippine payment methods',
   'Native GoHighLevel integration',
