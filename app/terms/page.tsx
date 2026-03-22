@@ -2,8 +2,18 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — TaraPayments',
-  description: 'Terms and conditions governing the use of TaraPayments.',
+  title: 'Terms of Service — TaraPayments | Xendit GoHighLevel Integration',
+  description: 'Terms and conditions governing the use of TaraPayments, the Xendit GoHighLevel integration for Philippine payment processing.',
+  alternates: {
+    canonical: '/terms',
+  },
+  openGraph: {
+    title: 'Terms of Service — TaraPayments',
+    description: 'Terms and conditions governing the use of TaraPayments.',
+    type: 'website',
+    url: 'https://payments.taraai.ph/terms',
+    siteName: 'TaraPayments',
+  },
 }
 
 export default function TermsOfService() {

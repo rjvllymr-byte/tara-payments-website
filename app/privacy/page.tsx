@@ -2,8 +2,18 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — TaraPayments',
-  description: 'How TaraPayments collects, uses, and protects your personal information.',
+  title: 'Privacy Policy — TaraPayments | Xendit GoHighLevel Integration',
+  description: 'How TaraPayments, the Xendit GoHighLevel integration for the Philippines, collects, uses, and protects your personal information.',
+  alternates: {
+    canonical: '/privacy',
+  },
+  openGraph: {
+    title: 'Privacy Policy — TaraPayments',
+    description: 'How TaraPayments collects, uses, and protects your personal information.',
+    type: 'website',
+    url: 'https://payments.taraai.ph/privacy',
+    siteName: 'TaraPayments',
+  },
 }
 
 export default function PrivacyPolicy() {
