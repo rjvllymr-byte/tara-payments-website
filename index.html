@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaraPayments — Philippine Payments for GoHighLevel</title>
+  <meta name="description" content="Accept GCash, Maya, QRPH, credit cards, and every major Philippine payment method directly inside GoHighLevel. Built for Filipino agencies and coaches.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'system-ui', 'sans-serif'] },
+          colors: {
+            navy:   { DEFAULT: '#092750', 800: '#0d3568', 700: '#0f4080' },
+            teal:   { DEFAULT: '#05b8b6', dark: '#049e9c', light: '#e0fafa' },
+            brand:  { blue: '#025eb2',  accent: '#0451ad', mid: '#0c68af' },
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #ffffff;
+      color: #0f172a;
+      overflow-x: hidden;
+    }
+
+    /* ── Scroll reveal ──────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.16,1,0.3,1),
+                  transform 0.65s cubic-bezier(0.16,1,0.3,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    .d100 { transition-delay: .10s; }
+    .d200 { transition-delay: .20s; }
+    .d300 { transition-delay: .30s; }
+    .d400 { transition-delay: .40s; }
+    .d500 { transition-delay: .50s; }
+    .d600 { transition-delay: .60s; }
+
+    /* ── Nav ────────────────────────────────────── */
+    #nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      transition: background 0.3s ease, box-shadow 0.3s ease, backdrop-filter 0.3s ease;
+    }
+    #nav.scrolled {
+      background: rgba(9,39,80,0.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    /* ── Buttons ────────────────────────────────── */
+    .btn-teal {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #05b8b6; color: #092750;
+      font-weight: 700; font-size: 0.875rem;
+      padding: 14px 28px; border-radius: 14px;
+      transition: opacity 0.2s ease, transform 0.15s ease;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn-teal:hover  { opacity: 0.9; }
+    .btn-teal:active { transform: scale(0.98) translateY(1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,0.8);
+      font-weight: 600; font-size: 0.875rem;
+      padding: 14px 24px; border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      text-decoration: none; white-space: nowrap;
+    }
+    .btn-ghost:hover  { border-color: rgba(255,255,255,0.35); color: #fff; }
+    .btn-ghost:active { transform: scale(0.98) translateY(1px); }
+
+    /* ── Method cards ───────────────────────────── */
+    .method-card {
+      transition: transform 0.35s cubic-bezier(0.16,1,0.3,1),
+                  box-shadow 0.35s ease;
+    }
+    .method-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 48px -12px rgba(9,39,80,0.18);
+    }
+
+    /* ── Pulse dot ──────────────────────────────── */
+    @keyframes pulse-ring {
+      0%   { transform: scale(1); opacity: .8; }
+      100% { transform: scale(2.2); opacity: 0; }
+    }
+    .pulse-dot { position: relative; display: inline-block; }
+    .pulse-dot::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 50%; background: #05b8b6;
+      animation: pulse-ring 2s ease-out infinite;
+    }
+
+    /* ── Float ──────────────────────────────────── */
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+    .float-a { animation: float 4.2s ease-in-out infinite; }
+    .float-b { animation: float 4.2s ease-in-out infinite .7s; }
+
+    /* ── Shimmer ────────────────────────────────── */
+    @keyframes shimmer {
+      0%   { background-position: -200% 0; }
+      100% { background-position:  200% 0; }
+    }
+
+    /* ── Marquee ────────────────────────────────── */
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 28s linear infinite; }
+    .marquee-track:hover { animation-play-state: paused; }
+
+    /* ── FAQ accordion ──────────────────────────── */
+    details summary { list-style: none; cursor: pointer; }
+    details summary::-webkit-details-marker { display: none; }
+    details .faq-chevron { transition: transform 0.3s ease; }
+    details[open] .faq-chevron { transform: rotate(180deg); }
+
+    /* ── Rate mono ──────────────────────────────── */
+    .rate { font-feature-settings: "tnum"; letter-spacing: -0.02em; }
+
+    /* ── Tinted shadow ──────────────────────────── */
+    .shadow-navy { box-shadow: 0 32px 64px -16px rgba(9,39,80,0.45); }
+    .shadow-card  { box-shadow: 0 4px 24px rgba(9,39,80,0.07); }
+
+    /* ── Scrollbar ──────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  </style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════
+     NAV
+═══════════════════════════════════════ -->
+<nav id="nav">
+  <div style="max-width:1320px" class="mx-auto px-6 py-4 flex items-center justify-between gap-8">
+
+    <!-- Logo -->
+    <a href="#" class="shrink-0">
+      <img src="tara-payments.png" alt="TaraPayments" style="height:52px; width:auto; mix-blend-mode:screen;">
+    </a>
+
+    <!-- Links -->
+    <div class="hidden md:flex items-center gap-7">
+      <a href="#payment-methods" class="text-sm font-medium transition-colors duration-200" style="color:rgba(255,255,255,.6);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Payment Methods</a>
+      <a href="#pricing"         class="text-sm font-medium transition-colors duration-200" style="color:rgba(255,255,255,.6);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">Pricing</a>
+      <a href="#how-it-works"    class="text-sm font-medium transition-colors duration-200" style="color:rgba(255,255,255,.6);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">How It Works</a>
+      <a href="#faq"             class="text-sm font-medium transition-colors duration-200" style="color:rgba(255,255,255,.6);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.6)'">FAQ</a>
+    </div>
+
+    <!-- CTA -->
+    <a href="#pricing" class="btn-teal text-xs px-5 py-2.5" style="border-radius:10px; padding:10px 20px; font-size:.8rem;">
+      Get Started — $39/mo
+    </a>
+
+  </div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section style="background:#092750; min-height:100dvh;" class="flex items-center relative overflow-hidden">
+
+  <!-- Background gradients -->
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 72% 48%, rgba(5,184,182,.09) 0%, transparent 55%), radial-gradient(ellipse at 18% 80%, rgba(2,94,178,.14) 0%, transparent 50%);"></div>
+  <!-- Subtle grid -->
+  <div class="absolute inset-0 pointer-events-none" style="opacity:.025; background-image: linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px); background-size: 64px 64px;"></div>
+
+  <div style="max-width:1320px" class="mx-auto px-6 pt-28 pb-20 w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+      <!-- ── Left: Copy ── -->
+      <div>
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-full mb-9 reveal" style="background:rgba(5,184,182,.1); border:1px solid rgba(5,184,182,.22);">
+          <span class="pulse-dot w-2 h-2 rounded-full shrink-0" style="background:#05b8b6; display:inline-block;"></span>
+          <span class="text-xs font-semibold" style="color:#05b8b6;">Now live on GoHighLevel Marketplace</span>
+        </div>
+
+        <h1 class="font-black tracking-tighter leading-none text-white mb-7 reveal d100" style="font-size:clamp(2.8rem,6vw,5rem); font-weight:900;">
+          Philippine<br>payments,<br><span style="color:#05b8b6;">inside GHL.</span>
+        </h1>
+
+        <p class="text-lg leading-relaxed mb-10 reveal d200" style="color:rgba(255,255,255,.55); max-width:52ch;">
+          The only payment gateway built specifically for GoHighLevel users in the Philippines. Accept GCash, Maya, QRPH, credit cards, and more — right inside your funnels and order pages.
+        </p>
+
+        <!-- Checklist -->
+        <ul class="flex flex-col gap-3 mb-11 reveal d300">
+          <li class="flex items-center gap-2.5 text-sm" style="color:rgba(255,255,255,.7);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="rgba(5,184,182,.18)"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            GCash, Maya, ShopeePay &amp; GrabPay
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:rgba(255,255,255,.7);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="rgba(5,184,182,.18)"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            QRPH, Credit &amp; Debit Cards
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:rgba(255,255,255,.7);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="rgba(5,184,182,.18)"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Direct Debit — BPI, RCBC, UnionBank &amp; Chinabank
+          </li>
+          <li class="flex items-center gap-2.5 text-sm" style="color:rgba(255,255,255,.7);">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="9" fill="rgba(5,184,182,.18)"/><path d="M5.5 9l2.5 2.5 4.5-4.5" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Cebuana Lhuillier, LBC &amp; Billease Pay Later
+          </li>
+        </ul>
+
+        <!-- CTA row -->
+        <div class="flex flex-wrap gap-4 reveal d400">
+          <a href="#pricing" class="btn-teal">
+            <svg width="17" height="17" viewBox="0 0 17 17" fill="none"><path d="M2 8.5h13M8.5 2l6.5 6.5-6.5 6.5" stroke="#092750" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Install on GoHighLevel
+          </a>
+          <a href="#payment-methods" class="btn-ghost">See payment methods</a>
+        </div>
+
+        <p class="mt-5 text-xs reveal d500" style="color:rgba(255,255,255,.3);">$39/month · No setup fee · Cancel anytime</p>
+      </div>
+
+      <!-- ── Right: Checkout mockup ── -->
+      <div class="hidden lg:flex justify-end items-center">
+        <div class="relative w-full" style="max-width:420px;">
+
+          <!-- Main browser/checkout card -->
+          <div class="rounded-3xl overflow-hidden shadow-navy reveal d200" style="background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);">
+            <!-- Chrome bar -->
+            <div class="flex items-center gap-2 px-5 py-3.5" style="border-bottom:1px solid rgba(255,255,255,.07);">
+              <div class="flex gap-1.5">
+                <div class="w-3 h-3 rounded-full" style="background:rgba(255,255,255,.14);"></div>
+                <div class="w-3 h-3 rounded-full" style="background:rgba(255,255,255,.14);"></div>
+                <div class="w-3 h-3 rounded-full" style="background:rgba(255,255,255,.14);"></div>
+              </div>
+              <div class="flex-1 mx-4">
+                <div class="rounded-md py-1 px-3 text-xs" style="background:rgba(255,255,255,.06); color:rgba(255,255,255,.35);">checkout.gohighlevel.com</div>
+              </div>
+            </div>
+
+            <!-- Payment UI body -->
+            <div class="p-7">
+              <!-- Order line -->
+              <div class="mb-5">
+                <p class="text-xs font-semibold tracking-widest uppercase mb-3" style="color:rgba(255,255,255,.35);">Complete Your Order</p>
+                <div class="flex justify-between items-center">
+                  <span class="text-white font-semibold text-sm">Digital Marketing Masterclass</span>
+                  <span class="font-black text-lg" style="color:#05b8b6;">₱4,997</span>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid rgba(255,255,255,.07);" class="mb-5"></div>
+
+              <!-- Method label -->
+              <p class="text-xs font-semibold tracking-widest uppercase mb-3" style="color:rgba(255,255,255,.35);">Select Payment Method</p>
+
+              <!-- Method grid -->
+              <div class="grid grid-cols-2 gap-2 mb-5">
+                <!-- GCash — active -->
+                <div class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-semibold text-white" style="background:rgba(5,184,182,.15); border:1.5px solid #05b8b6;">
+                  <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#0066FF;">G</div>
+                  GCash
+                </div>
+                <!-- Maya -->
+                <div class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.55);">
+                  <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#00AB4E;">M</div>
+                  Maya
+                </div>
+                <!-- Card -->
+                <div class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.55);">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="4" width="14" height="10" rx="2" stroke="rgba(255,255,255,.45)" stroke-width="1.3"/><path d="M2 7.5h14" stroke="rgba(255,255,255,.45)" stroke-width="1.3"/></svg>
+                  Card
+                </div>
+                <!-- QRPH -->
+                <div class="flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-sm font-medium" style="background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); color:rgba(255,255,255,.55);">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="6" height="6" rx="1" stroke="rgba(255,255,255,.45)" stroke-width="1.3"/><rect x="10" y="2" width="6" height="6" rx="1" stroke="rgba(255,255,255,.45)" stroke-width="1.3"/><rect x="2" y="10" width="6" height="6" rx="1" stroke="rgba(255,255,255,.45)" stroke-width="1.3"/><rect x="11" y="11" width="3" height="3" fill="rgba(255,255,255,.45)" rx=".5"/><rect x="11" y="15" width="3" height="1" fill="rgba(255,255,255,.45)" rx=".5"/><rect x="15" y="11" width="1" height="3" fill="rgba(255,255,255,.45)" rx=".5"/></svg>
+                  QRPH
+                </div>
+              </div>
+
+              <!-- Pay button -->
+              <button class="w-full py-3.5 rounded-2xl font-bold text-sm" style="background:#05b8b6; color:#092750; letter-spacing:-.01em;">
+                Pay ₱4,997 with GCash
+              </button>
+
+              <!-- Trust line -->
+              <div class="flex items-center justify-center gap-2 mt-4">
+                <svg width="13" height="13" viewBox="0 0 13 13" fill="none"><path d="M6.5 1L2 3.5v4c0 2.8 2 4.9 4.5 5.5C9 12.4 11 10.3 11 7.5v-4L6.5 1z" stroke="rgba(255,255,255,.25)" stroke-width="1.1"/></svg>
+                <span class="text-xs" style="color:rgba(255,255,255,.25);">Secured by TaraPayments</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating notification — top right -->
+          <div class="absolute float-a" style="top:56px; right:-28px; z-index:10;">
+            <div class="flex items-center gap-3 px-4 py-3 rounded-2xl" style="background:#025eb2; border:1px solid rgba(5,184,182,.3); box-shadow:0 16px 40px rgba(0,0,0,.35);">
+              <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.2);">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7l3 3 5-5" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <p class="text-xs font-bold text-white" style="line-height:1.2;">Payment confirmed</p>
+                <p class="text-xs" style="color:rgba(255,255,255,.5); line-height:1.2;">₱4,997 via GCash</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floating stats — bottom left -->
+          <div class="absolute float-b" style="bottom:48px; left:-32px; z-index:10;">
+            <div class="px-4 py-3.5 rounded-2xl" style="background:rgba(9,39,80,.92); border:1px solid rgba(255,255,255,.1); box-shadow:0 16px 40px rgba(0,0,0,.35); backdrop-filter:blur(10px);">
+              <p class="text-xs mb-1" style="color:rgba(255,255,255,.4);">Today's revenue</p>
+              <p class="text-xl font-black text-white rate">₱83,142</p>
+              <p class="text-xs font-semibold mt-0.5" style="color:#05b8b6;">+24.7% vs. yesterday</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     MARQUEE TRUST BAR
+═══════════════════════════════════════ -->
+<div style="background:#f8fafc; border-top:1px solid #e2e8f0; border-bottom:1px solid #e2e8f0; overflow:hidden; padding:16px 0;">
+  <div class="marquee-track flex items-center gap-12 whitespace-nowrap" style="width:max-content;">
+    <!-- Repeat items twice for seamless loop -->
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full bg-teal-500 shrink-0" style="background:#05b8b6;"></span>GCash</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Maya</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>ShopeePay</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>GrabPay</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>QRPH</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Visa &amp; Mastercard</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>BPI Direct Debit</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>RCBC</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>UnionBank</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Chinabank</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Cebuana Lhuillier</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>LBC</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Billease</span>
+    <!-- Duplicate -->
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>GCash</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Maya</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>ShopeePay</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>GrabPay</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>QRPH</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Visa &amp; Mastercard</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>BPI Direct Debit</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>RCBC</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>UnionBank</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Chinabank</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Cebuana Lhuillier</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>LBC</span>
+    <span class="flex items-center gap-2 text-sm font-medium text-slate-500"><span class="w-1.5 h-1.5 rounded-full shrink-0" style="background:#05b8b6;"></span>Billease</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     PAYMENT METHODS
+═══════════════════════════════════════ -->
+<section id="payment-methods" class="py-28" style="background:#ffffff;">
+  <div style="max-width:1320px" class="mx-auto px-6">
+
+    <!-- Header — left aligned, asymmetric -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-16">
+      <div class="lg:col-span-7 reveal">
+        <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#05b8b6;">Payment Methods</p>
+        <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900 mb-5">
+          Every Filipino<br>payment, covered.
+        </h2>
+        <p class="text-base leading-relaxed text-slate-500" style="max-width:52ch;">
+          From GCash to Cebuana, your customers pay how they prefer. One integration gives you access to all local Philippine payment channels — no extra accounts needed.
+        </p>
+      </div>
+    </div>
+
+    <!-- Asymmetric bento grid -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+      <!-- E-Wallets — large, dark (8 cols) -->
+      <div class="md:col-span-8 method-card reveal d100 rounded-3xl p-9 relative overflow-hidden" style="background:#092750; border:1px solid rgba(255,255,255,.06);">
+        <div class="absolute top-0 right-0 pointer-events-none" style="width:280px; height:280px; background:radial-gradient(circle, rgba(5,184,182,.1) 0%, transparent 70%); transform:translate(35%,-35%);"></div>
+        <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-8">
+          <div>
+            <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:rgba(5,184,182,.55);">E-Wallets</p>
+            <h3 class="text-2xl font-bold text-white leading-tight">GCash, Maya,<br>ShopeePay &amp; GrabPay</h3>
+          </div>
+          <div class="shrink-0">
+            <span class="rate text-3xl font-black" style="color:#05b8b6;">2.5%</span>
+            <p class="text-xs mt-1" style="color:rgba(255,255,255,.35);">per transaction</p>
+          </div>
+        </div>
+        <div class="flex flex-wrap gap-2.5">
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#0066FF;">G</div>
+            <span class="text-white text-sm font-semibold">GCash</span>
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#00AB4E;">M</div>
+            <span class="text-white text-sm font-semibold">Maya</span>
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#EE4D2D;">S</div>
+            <span class="text-white text-sm font-semibold">ShopeePay</span>
+          </div>
+          <div class="flex items-center gap-2 px-3.5 py-2 rounded-2xl" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.1);">
+            <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black text-white shrink-0" style="background:#00B14F; font-size:10px;">GP</div>
+            <span class="text-white text-sm font-semibold">GrabPay</span>
+          </div>
+        </div>
+        <p class="mt-6 text-xs" style="color:rgba(255,255,255,.3);">Rates powered by Xendit · inclusive of applicable taxes</p>
+      </div>
+
+      <!-- QRPH (4 cols) -->
+      <div class="md:col-span-4 method-card reveal d200 rounded-3xl p-9 relative overflow-hidden" style="background:#f8fafc; border:1px solid #e2e8f0;">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#05b8b6;">National QR</p>
+        <h3 class="text-2xl font-bold text-slate-900 mb-3">QRPH</h3>
+        <p class="text-sm text-slate-500 leading-relaxed mb-8" style="max-width:30ch;">Scan-to-pay from any PH bank or e-wallet. Fully interoperable — no wallet lock-in.</p>
+        <span class="rate text-4xl font-black" style="color:#025eb2;">1.5%</span>
+        <p class="text-xs text-slate-400 mt-1.5">per transaction</p>
+        <!-- QR icon -->
+        <div class="absolute bottom-6 right-6 opacity-10 pointer-events-none">
+          <svg width="72" height="72" viewBox="0 0 72 72" fill="none">
+            <rect x="4" y="4" width="28" height="28" rx="4" stroke="#025eb2" stroke-width="3.5"/>
+            <rect x="12" y="12" width="12" height="12" fill="#025eb2" rx="1.5"/>
+            <rect x="40" y="4" width="28" height="28" rx="4" stroke="#025eb2" stroke-width="3.5"/>
+            <rect x="48" y="12" width="12" height="12" fill="#025eb2" rx="1.5"/>
+            <rect x="4" y="40" width="28" height="28" rx="4" stroke="#025eb2" stroke-width="3.5"/>
+            <rect x="12" y="48" width="12" height="12" fill="#025eb2" rx="1.5"/>
+            <rect x="40" y="40" width="8" height="8" fill="#025eb2" rx="1"/>
+            <rect x="52" y="40" width="8" height="8" fill="#025eb2" rx="1"/>
+            <rect x="40" y="52" width="8" height="8" fill="#025eb2" rx="1"/>
+            <rect x="52" y="52" width="8" height="8" fill="#025eb2" rx="1"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- Credit/Debit Cards (5 cols) -->
+      <div class="md:col-span-5 method-card reveal d300 rounded-3xl p-9 relative overflow-hidden" style="background:linear-gradient(145deg, #025eb2 0%, #092750 100%); border:1px solid rgba(255,255,255,.08);">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:rgba(5,184,182,.65);">Cards</p>
+        <h3 class="text-2xl font-bold text-white mb-3">Credit &amp; Debit</h3>
+        <p class="text-sm mb-8 leading-relaxed" style="color:rgba(255,255,255,.5);">All major local and international cards — Visa, Mastercard, JCB. 3D Secure enabled.</p>
+        <div class="flex items-baseline gap-2">
+          <span class="rate text-3xl font-black text-white">2.9%</span>
+          <span class="text-lg font-semibold" style="color:rgba(255,255,255,.45);">+ ₱15</span>
+        </div>
+        <p class="text-xs mt-2" style="color:rgba(255,255,255,.3);">per successful transaction</p>
+      </div>
+
+      <!-- Direct Debit (4 cols) -->
+      <div class="md:col-span-4 method-card reveal d400 rounded-3xl p-9" style="background:#f0f9ff; border:1px solid #bae6fd;">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#025eb2;">Direct Debit</p>
+        <h3 class="text-xl font-bold text-slate-900 mb-4">Bank Account</h3>
+        <div class="flex flex-wrap gap-2 mb-8">
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-lg" style="background:rgba(2,94,178,.1); color:#025eb2;">BPI</span>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-lg" style="background:rgba(2,94,178,.1); color:#025eb2;">RCBC</span>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-lg" style="background:rgba(2,94,178,.1); color:#025eb2;">UnionBank</span>
+          <span class="text-xs font-semibold px-2.5 py-1 rounded-lg" style="background:rgba(2,94,178,.1); color:#025eb2;">Chinabank</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="rate text-2xl font-black" style="color:#025eb2;">1.5%</span>
+          <span class="text-base font-medium text-slate-400">+ ₱20</span>
+        </div>
+      </div>
+
+      <!-- Retail Outlets (3 cols) -->
+      <div class="md:col-span-3 method-card reveal d500 rounded-3xl p-9" style="background:#fff7ed; border:1px solid #fed7aa;">
+        <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:#c2410c;">Retail</p>
+        <h3 class="text-xl font-bold text-slate-900 mb-4">Over-the-Counter</h3>
+        <div class="flex flex-col gap-2 mb-8">
+          <span class="text-sm font-semibold text-slate-700">Cebuana Lhuillier</span>
+          <span class="text-sm font-semibold text-slate-700">LBC</span>
+        </div>
+        <div class="flex items-baseline gap-2">
+          <span class="rate text-2xl font-black" style="color:#c2410c;">₱35</span>
+          <span class="text-sm font-medium text-slate-400">flat fee</span>
+        </div>
+      </div>
+
+      <!-- Billease — full width -->
+      <div class="md:col-span-12 method-card reveal d600 rounded-3xl p-9 flex flex-col md:flex-row md:items-center md:justify-between gap-6" style="background:#092750; border:1px solid rgba(5,184,182,.18);">
+        <div>
+          <p class="text-xs font-bold tracking-widest uppercase mb-2" style="color:rgba(5,184,182,.55);">Buy Now, Pay Later</p>
+          <h3 class="text-2xl font-bold text-white mb-2">Billease</h3>
+          <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.5); max-width:58ch;">Let customers split purchases into installments. Billease absorbs the credit risk — you receive the full amount upfront. The Philippines' leading BNPL provider.</p>
+        </div>
+        <div class="flex flex-col items-start md:items-end gap-2 shrink-0">
+          <div class="flex items-baseline gap-2">
+            <span class="rate text-4xl font-black" style="color:#05b8b6;">6%</span>
+            <span class="text-lg font-medium" style="color:rgba(255,255,255,.4);">per transaction</span>
+          </div>
+          <p class="text-xs" style="color:rgba(255,255,255,.3);">You get paid upfront · zero collection risk</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     PRICING
+═══════════════════════════════════════ -->
+<section id="pricing" class="py-28" style="background:#f8fafc;">
+  <div style="max-width:1320px" class="mx-auto px-6">
+
+    <div class="mb-16 reveal">
+      <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#05b8b6;">Pricing</p>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900 mb-5">
+        One plan.<br>All payment methods.
+      </h2>
+      <p class="text-base text-slate-500 leading-relaxed" style="max-width:50ch;">
+        A flat monthly subscription gives you every payment channel. You only pay transaction fees when payments succeed.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+      <!-- Plan card (5 cols) -->
+      <div class="lg:col-span-5 reveal d100">
+        <div class="rounded-3xl p-9 relative overflow-hidden h-full" style="background:#092750; border:1px solid rgba(5,184,182,.2);">
+          <div class="absolute top-0 right-0 pointer-events-none" style="width:220px; height:220px; background:radial-gradient(circle, rgba(5,184,182,.1) 0%, transparent 70%); transform:translate(30%,-30%);"></div>
+
+          <!-- Label -->
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-7" style="background:rgba(5,184,182,.12); border:1px solid rgba(5,184,182,.28);">
+            <span class="text-xs font-bold" style="color:#05b8b6;">TaraPayments Pro</span>
+          </div>
+
+          <!-- Price -->
+          <div class="mb-9">
+            <div class="flex items-start gap-1">
+              <span class="text-xl font-bold text-white mt-2">$</span>
+              <span class="rate font-black text-white" style="font-size:4.5rem; line-height:1; letter-spacing:-.04em;">39</span>
+            </div>
+            <p class="text-sm mt-2" style="color:rgba(255,255,255,.4);">per month, billed monthly</p>
+          </div>
+
+          <!-- Features -->
+          <ul class="flex flex-col gap-3.5 mb-9">
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">All Philippine payment methods</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Native GoHighLevel integration</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Funnel &amp; order page support</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Real-time transaction dashboard</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Automatic GHL workflow triggers</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Payment receipts &amp; failed-payment retry</span>
+            </li>
+            <li class="flex items-center gap-3">
+              <div class="w-5 h-5 rounded-full flex items-center justify-center shrink-0" style="background:rgba(5,184,182,.18);">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2 5l2 2 4-4" stroke="#05b8b6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="text-sm text-white">Priority Filipino support</span>
+            </li>
+          </ul>
+
+          <a href="#" class="btn-teal w-full justify-center" style="border-radius:14px;">
+            Install from GHL Marketplace
+          </a>
+          <p class="text-xs text-center mt-3" style="color:rgba(255,255,255,.3);">Cancel anytime · No long-term contracts</p>
+        </div>
+      </div>
+
+      <!-- Rates table (7 cols) -->
+      <div class="lg:col-span-7 reveal d200">
+        <div class="rounded-3xl overflow-hidden shadow-card" style="background:white; border:1px solid #e2e8f0;">
+          <div class="px-8 py-6" style="border-bottom:1px solid #f1f5f9;">
+            <h3 class="text-lg font-bold text-slate-900">Transaction Fees</h3>
+            <p class="text-sm text-slate-400 mt-1">Per successful payment only. Failed transactions are never charged.</p>
+          </div>
+
+          <div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="border-bottom:1px solid #f8fafc;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">E-Wallets</p>
+                <p class="text-xs text-slate-400 mt-0.5">GCash · Maya · ShopeePay · GrabPay</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">2.5%</span>
+            </div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="border-bottom:1px solid #f8fafc;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">Credit &amp; Debit Cards</p>
+                <p class="text-xs text-slate-400 mt-0.5">Visa · Mastercard · JCB</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">2.9% + ₱15</span>
+            </div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="border-bottom:1px solid #f8fafc;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">QRPH</p>
+                <p class="text-xs text-slate-400 mt-0.5">Interoperable PH QR standard</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">1.5%</span>
+            </div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="border-bottom:1px solid #f8fafc;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">Direct Debit</p>
+                <p class="text-xs text-slate-400 mt-0.5">BPI · RCBC · UnionBank · Chinabank</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">1.5% + ₱20</span>
+            </div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="border-bottom:1px solid #f8fafc;" onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='white'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">Retail Outlets</p>
+                <p class="text-xs text-slate-400 mt-0.5">Cebuana Lhuillier · LBC</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">₱35 flat</span>
+            </div>
+
+            <div class="px-8 py-5 flex items-center justify-between" style="background:rgba(5,184,182,.03);" onmouseover="this.style.background='rgba(5,184,182,.06)'" onmouseout="this.style.background='rgba(5,184,182,.03)'">
+              <div>
+                <p class="font-semibold text-slate-900 text-sm">Pay Later — Billease</p>
+                <p class="text-xs text-slate-400 mt-0.5">Buy now, pay in installments</p>
+              </div>
+              <span class="rate font-black text-lg" style="color:#025eb2;">6%</span>
+            </div>
+
+          </div>
+
+          <div class="px-8 py-4 flex items-start gap-2.5" style="background:#f8fafc; border-top:1px solid #e2e8f0;">
+            <svg class="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6.5" stroke="#94a3b8" stroke-width="1.1"/><path d="M7 4.5v3.5M7 10v.5" stroke="#94a3b8" stroke-width="1.1" stroke-linecap="round"/></svg>
+            <p class="text-xs text-slate-400 leading-relaxed">Transaction rates powered by Xendit's BSP-regulated infrastructure. Rates shown are standard published rates — volume discounts may apply. Verify current rates at <a href="https://www.xendit.co/en-ph/pricing/" target="_blank" rel="noopener" style="color:#025eb2; text-decoration:underline;">xendit.co/en-ph/pricing</a>.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════ -->
+<section id="how-it-works" class="py-28" style="background:#ffffff;">
+  <div style="max-width:1320px" class="mx-auto px-6">
+
+    <div class="mb-16 reveal">
+      <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#05b8b6;">Setup</p>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900">
+        Running in minutes,<br>not months.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+
+      <!-- Step 1 — tall left -->
+      <div class="md:col-span-5 reveal d100">
+        <div class="rounded-3xl p-9 h-full" style="background:#f8fafc; border:1px solid #e2e8f0;">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg text-white mb-7" style="background:#05b8b6;">1</div>
+          <h3 class="text-xl font-bold text-slate-900 mb-3">Install from the Marketplace</h3>
+          <p class="text-sm text-slate-500 leading-relaxed mb-7">Search "TaraPayments" in your GoHighLevel account's Marketplace tab. One click to install — no code, no developer.</p>
+          <!-- GHL card mockup -->
+          <div class="rounded-2xl p-4" style="background:white; border:1px solid #e2e8f0;">
+            <div class="flex items-center gap-3.5">
+              <div class="w-11 h-11 rounded-xl flex items-center justify-center shrink-0" style="background:#092750;">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                  <rect x="3" y="3" width="7" height="7" rx="2" fill="#05b8b6"/>
+                  <rect x="12" y="3" width="7" height="7" rx="2" fill="rgba(5,184,182,.45)"/>
+                  <rect x="3" y="12" width="7" height="7" rx="2" fill="rgba(5,184,182,.45)"/>
+                  <rect x="12" y="12" width="7" height="7" rx="2" fill="rgba(5,184,182,.25)"/>
+                </svg>
+              </div>
+              <div class="flex-1">
+                <p class="text-sm font-bold text-slate-900">GoHighLevel Marketplace</p>
+                <p class="text-xs text-slate-400 mt-0.5">TaraPayments · Philippine Payments</p>
+              </div>
+              <div class="shrink-0">
+                <div class="px-3 py-1.5 rounded-lg text-xs font-bold" style="background:#05b8b6; color:#092750;">Install</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Steps 2 & 3 stacked (7 cols) -->
+      <div class="md:col-span-7 flex flex-col gap-5">
+
+        <!-- Step 2 -->
+        <div class="reveal d200">
+          <div class="rounded-3xl p-9 flex items-start gap-7" style="background:#f0f9ff; border:1px solid #bae6fd;">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg text-white shrink-0 mt-1" style="background:#025eb2;">2</div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">Link your Xendit account</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Connect your existing Xendit Philippines merchant account — or create a free one. TaraPayments routes all transactions directly through Xendit's BSP-regulated infrastructure. No new bank accounts required.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal d300">
+          <div class="rounded-3xl p-9 flex items-start gap-7" style="background:#f0fdf4; border:1px solid #bbf7d0;">
+            <div class="w-12 h-12 rounded-2xl flex items-center justify-center font-black text-lg text-white shrink-0 mt-1" style="background:#16a34a;">3</div>
+            <div>
+              <h3 class="text-xl font-bold text-slate-900 mb-2">Add to your funnels and collect</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">Select TaraPayments as your payment provider in any GHL funnel, form, or order page. Your customers instantly see all Philippine payment options at checkout — GCash, cards, QRPH, and more.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     WHY TARAPAYMENTS
+═══════════════════════════════════════ -->
+<section class="py-28" style="background:#092750;">
+  <div style="max-width:1320px" class="mx-auto px-6">
+
+    <div class="mb-16 reveal">
+      <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:rgba(5,184,182,.55);">Why TaraPayments</p>
+      <h2 class="text-4xl md:text-5xl font-black tracking-tighter leading-none text-white">
+        Built for Filipino<br>GHL businesses.
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3" style="border:1px solid rgba(255,255,255,.07); border-radius:24px; overflow:hidden;">
+
+      <div class="p-8 reveal d100" style="border-right:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L3 6.5v5.5c0 3.3 3 6 7 7 4-1 7-3.7 7-7V6.5L10 2z" stroke="#05b8b6" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">BSP-Regulated Infrastructure</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">Built on Xendit's Bangko Sentral ng Pilipinas regulated infrastructure. Your transactions are compliant, auditable, and protected.</p>
+      </div>
+
+      <div class="p-8 reveal d200" style="border-right:1px solid rgba(255,255,255,.07); border-bottom:1px solid rgba(255,255,255,.07);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 10h14M10 3l7 7-7 7" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 6l-2 4 2 4" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity=".4"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">GHL Workflow Triggers</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">Every successful payment fires a webhook to GHL in real time — tagging contacts, enrolling in courses, or kicking off onboarding sequences automatically.</p>
+      </div>
+
+      <div class="p-8 reveal d300" style="border-bottom:1px solid rgba(255,255,255,.07);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7.5" stroke="#05b8b6" stroke-width="1.5"/><path d="M10 6.5v4l2.5 2.5" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">Same-Day Activation</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">No developer required. Install, link your Xendit account, and you're accepting payments the same day. The setup takes under 10 minutes.</p>
+      </div>
+
+      <div class="p-8 reveal d100" style="border-right:1px solid rgba(255,255,255,.07);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="5" width="16" height="12" rx="2" stroke="#05b8b6" stroke-width="1.5"/><path d="M2 8.5h16M6.5 12.5h3M12 12.5h3.5" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">Peso-First Checkout</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">Customers see ₱ peso pricing and familiar Filipino payment icons — no USD confusion, no currency conversion friction at checkout.</p>
+      </div>
+
+      <div class="p-8 reveal d200" style="border-right:1px solid rgba(255,255,255,.07);">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10l4 4 8-8" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="10" r="8.5" stroke="#05b8b6" stroke-width="1.5" stroke-dasharray="2 3"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">Failed Payment Recovery</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">Automatic retry logic and payment-link re-sends via GHL SMS or email when a transaction doesn't complete on the first attempt.</p>
+      </div>
+
+      <div class="p-8 reveal d300">
+        <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5" style="background:rgba(5,184,182,.12);">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="7" r="3" stroke="#05b8b6" stroke-width="1.5"/><path d="M4 18c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="#05b8b6" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3 class="text-base font-bold text-white mb-2">Filipino Support Team</h3>
+        <p class="text-sm leading-relaxed" style="color:rgba(255,255,255,.45);">Support from a team that understands Philippine banking nuances, local payment flows, and BSP regulations — in your timezone.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FAQ
+═══════════════════════════════════════ -->
+<section id="faq" class="py-28" style="background:#ffffff;">
+  <div style="max-width:1320px" class="mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+
+      <!-- Left label -->
+      <div class="lg:col-span-4 reveal">
+        <p class="text-xs font-bold tracking-widest uppercase mb-3" style="color:#05b8b6;">FAQ</p>
+        <h2 class="text-4xl font-black tracking-tighter text-slate-900 leading-none mb-5">
+          Common<br>questions.
+        </h2>
+        <p class="text-sm text-slate-400 leading-relaxed mb-6">Didn't find your answer? Our team responds within one business day.</p>
+        <a href="mailto:support@tarapayments.ph" class="inline-flex items-center gap-2 text-sm font-semibold" style="color:#025eb2;">
+          Contact support
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 7h10M7 2l5 5-5 5" stroke="#025eb2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+
+      <!-- FAQ items -->
+      <div class="lg:col-span-8">
+        <div style="border-top:1px solid #f1f5f9;">
+
+          <details class="group reveal d100" style="border-bottom:1px solid #f1f5f9;">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">Do I need a Xendit account to use TaraPayments?</span>
+              <svg class="faq-chevron shrink-0 text-slate-400" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">Yes. TaraPayments is built on Xendit's Philippine payment infrastructure. You need a verified Xendit Philippines merchant account — signing up is free, and you only pay when transactions succeed.</p>
+          </details>
+
+          <details class="group reveal d200" style="border-bottom:1px solid #f1f5f9;">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">Is TaraPayments officially listed on GoHighLevel Marketplace?</span>
+              <svg class="faq-chevron shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">Yes. TaraPayments is a verified app in the GoHighLevel Marketplace. Search "TaraPayments" inside your GHL account to install it — no external redirects, no manual configuration.</p>
+          </details>
+
+          <details class="group reveal d300" style="border-bottom:1px solid #f1f5f9;">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">How does payment triggering work with GHL automations?</span>
+              <svg class="faq-chevron shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">Every successful payment fires a real-time webhook into GoHighLevel, which you can use to trigger any automation — tag a contact, enroll in a course, send a receipt email, start an onboarding sequence, or update a pipeline stage.</p>
+          </details>
+
+          <details class="group reveal d400" style="border-bottom:1px solid #f1f5f9;">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">What currency do customers pay in?</span>
+              <svg class="faq-chevron shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">All checkout transactions are in Philippine Peso (₱ PHP). Settlements go directly to your Philippine bank account via Xendit. The $39/month subscription is charged in USD through GoHighLevel.</p>
+          </details>
+
+          <details class="group reveal d500" style="border-bottom:1px solid #f1f5f9;">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">Are there transaction volume limits?</span>
+              <svg class="faq-chevron shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">TaraPayments imposes no volume caps. Standard Xendit limits apply based on your merchant verification tier. Full verification typically unlocks higher limits within 3–5 business days.</p>
+          </details>
+
+          <details class="group reveal d600">
+            <summary class="flex items-center justify-between py-6 gap-4">
+              <span class="font-semibold text-slate-900">Does TaraPayments work with GHL sub-accounts?</span>
+              <svg class="faq-chevron shrink-0" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 7l5 5 5-5" stroke="#94a3b8" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </summary>
+            <p class="text-sm text-slate-500 leading-relaxed pb-6" style="max-width:58ch;">Yes. Agency owners can install TaraPayments at the agency level and configure it per sub-account. Each sub-account can link its own Xendit credentials for separate settlements.</p>
+          </details>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<section class="py-28 relative overflow-hidden" style="background:linear-gradient(145deg, #092750 0%, #025eb2 100%);">
+  <div class="absolute inset-0 pointer-events-none" style="background:radial-gradient(ellipse at 78% 50%, rgba(5,184,182,.13) 0%, transparent 55%);"></div>
+  <div class="absolute inset-0 pointer-events-none" style="opacity:.025; background-image:linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px); background-size:64px 64px;"></div>
+
+  <div style="max-width:1320px" class="mx-auto px-6 text-center reveal">
+    <p class="text-xs font-bold tracking-widest uppercase mb-5" style="color:rgba(5,184,182,.6);">Start Today</p>
+    <h2 class="font-black tracking-tighter text-white leading-none mb-6" style="font-size:clamp(2.8rem,6vw,5.5rem); font-weight:900;">
+      Tara na.<br><span style="color:#05b8b6;">Start collecting.</span>
+    </h2>
+    <p class="text-base leading-relaxed mb-10" style="color:rgba(255,255,255,.5); max-width:44ch; margin-left:auto; margin-right:auto;">
+      Install TaraPayments from the GoHighLevel Marketplace and accept your first Philippine payment today.
+    </p>
+    <div class="flex flex-wrap items-center justify-center gap-4">
+      <a href="#" class="btn-teal" style="font-size:.95rem; padding:16px 32px; border-radius:16px;">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2v11M4 9l5 5 5-5" stroke="#092750" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Install on GoHighLevel — $39/mo
+      </a>
+    </div>
+    <p class="mt-5 text-xs" style="color:rgba(255,255,255,.3);">No setup fee · No contract · Cancel anytime</p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════ -->
+<footer style="background:#060f1e; border-top:1px solid rgba(255,255,255,.05);">
+  <div style="max-width:1320px" class="mx-auto px-6 py-14">
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
+
+      <div>
+        <img src="tara-payments.png" alt="TaraPayments" style="height:52px; width:auto; mix-blend-mode:screen; opacity:.85;" class="mb-4">
+        <p class="text-xs leading-relaxed" style="color:rgba(255,255,255,.3); max-width:36ch;">Philippine payment gateway for GoHighLevel. Powered by Xendit's BSP-regulated infrastructure.</p>
+      </div>
+
+      <div class="flex flex-wrap gap-x-8 gap-y-3">
+        <a href="#payment-methods" class="text-xs transition-colors" style="color:rgba(255,255,255,.35);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Payment Methods</a>
+        <a href="#pricing"         class="text-xs transition-colors" style="color:rgba(255,255,255,.35);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Pricing</a>
+        <a href="#how-it-works"   class="text-xs transition-colors" style="color:rgba(255,255,255,.35);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">How It Works</a>
+        <a href="#faq"            class="text-xs transition-colors" style="color:rgba(255,255,255,.35);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">FAQ</a>
+        <a href="mailto:support@tarapayments.ph" class="text-xs transition-colors" style="color:rgba(255,255,255,.35);" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,.35)'">Support</a>
+      </div>
+
+    </div>
+
+    <div class="mt-10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4" style="border-top:1px solid rgba(255,255,255,.05);">
+      <p class="text-xs" style="color:rgba(255,255,255,.2);">© 2025 TaraPayments. All rights reserved.</p>
+      <div class="flex gap-6">
+        <a href="#" class="text-xs transition-colors" style="color:rgba(255,255,255,.2);" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Privacy Policy</a>
+        <a href="#" class="text-xs transition-colors" style="color:rgba(255,255,255,.2);" onmouseover="this.style.color='rgba(255,255,255,.5)'" onmouseout="this.style.color='rgba(255,255,255,.2)'">Terms of Service</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════ -->
+<script>
+  // ── Nav scroll ──────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 24);
+  }, { passive: true });
+
+  // ── Scroll reveal ───────────────────────────────
+  const observer = new IntersectionObserver(
+    entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+    { threshold: 0.08, rootMargin: '0px 0px -32px 0px' }
+  );
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ── Smooth anchor scroll ────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+
+</body>
+</html>

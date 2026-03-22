@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Base ─────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ── Scroll reveal ────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.d100 { transition-delay: 0.10s; }
+.d200 { transition-delay: 0.20s; }
+.d300 { transition-delay: 0.30s; }
+.d400 { transition-delay: 0.40s; }
+.d500 { transition-delay: 0.50s; }
+.d600 { transition-delay: 0.60s; }
+
+/* ── Float animations ─────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+.float-a { animation: float 4.2s ease-in-out infinite; }
+.float-b { animation: float 4.2s ease-in-out infinite 0.7s; }
+
+/* ── Pulse ring (live badge) ──────────────────── */
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+.pulse-dot::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: #05b8b6;
+  animation: pulse-ring 2s ease-out infinite;
+}
+
+/* ── Marquee ──────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 28s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ── FAQ chevron ──────────────────────────────── */
+details[open] .faq-chevron { transform: rotate(180deg); }
+.faq-chevron { transition: transform 0.3s ease; }
+
+/* ── Bento card hover ─────────────────────────── */
+.bento-card {
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1), box-shadow 0.35s ease;
+}
+.bento-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 24px 48px -12px rgba(5,184,182,.18);
+}
+
+/* ── Rate mono ────────────────────────────────── */
+.rate {
+  font-feature-settings: "tnum";
+  letter-spacing: -0.02em;
+}
+
+/* ── Scrollbar ────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #f1f5f9; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
