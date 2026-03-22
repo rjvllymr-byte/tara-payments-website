@@ -29,7 +29,7 @@ export default function Footer() {
                 alt="TaraPayments"
                 width={220}
                 height={63}
-                style={{ height: 120, width: 'auto' }}
+                style={{ height: 160, width: 'auto' }}
               />
             </div>
             <p className="text-xs leading-relaxed text-slate-400" style={{ maxWidth: '36ch' }}>
