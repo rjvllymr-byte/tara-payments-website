@@ -1,7 +1,11 @@
 const features = [
+  'Invoice Generation',
+  'Funnel Checkout Pages',
+  'Payment Links for Easy Transactions',
+  'Membership Access for Clients',
+  'Supports One-Time and Recurring Payments',
   'All Philippine payment methods',
   'Native GoHighLevel integration',
-  'Funnel & order page support',
   'Real-time transaction dashboard',
   'Automatic GHL workflow triggers',
   'Payment receipts & failed-payment retry',
@@ -11,11 +15,8 @@ const features = [
   'One-click refunds',
   'GHL contact tagging on payment',
   'Detailed transaction reports & exports',
-  'Webhook notifications',
-  'BSP-regulated Xendit infrastructure',
   'No transaction volume caps',
   'Instant payment confirmation emails',
-  'Secure API key encryption',
 ]
 
 type RateRow = { label: string; rate: string; note?: string }
