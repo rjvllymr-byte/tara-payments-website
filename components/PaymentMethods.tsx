@@ -145,47 +145,20 @@ export default function PaymentMethods() {
             <p className="text-sm text-slate-400 mt-1">Whichever is higher</p>
           </BentoCard>
 
-          {/* Retail Outlets — 3 cols */}
-          <BentoCard cols={3} delay="d500" style={{ background: '#fff7ed', border: '1px solid #fed7aa' }}>
-            <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#c2410c' }}>Retail</p>
-            <h3 className="text-xl font-bold text-slate-900 mb-5">Over-the-counter</h3>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex items-center justify-center px-3 py-2 rounded-xl" style={{ background: 'white', border: '1px solid #fed7aa' }}>
-                <Image src="/logos/cebuana-lhuillier.png" alt="Cebuana Lhuillier" width={100} height={32} style={{ height: 24, width: 'auto', objectFit: 'contain' }} />
-              </div>
-              <div className="flex items-center justify-center px-3 py-2 rounded-xl" style={{ background: 'white', border: '1px solid #fed7aa' }}>
-                <Image src="/logos/lbc.png" alt="LBC" width={52} height={32} style={{ height: 24, width: 'auto', objectFit: 'contain' }} />
-              </div>
+          {/* Buy Now Pay Later — 3 cols */}
+          <BentoCard cols={3} delay="d500" style={{ background: 'linear-gradient(145deg, #f0fdf4 0%, #dcfce7 100%)', border: '1px solid #bbf7d0' }}>
+            <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#16a34a' }}>Buy Now, Pay Later</p>
+            <div className="inline-flex items-center px-3 py-2 rounded-xl mb-5" style={{ background: 'white', border: '1px solid #bbf7d0' }}>
+              <Image src="/logos/billease.png" alt="Billease" width={100} height={28} style={{ height: 22, width: 'auto', objectFit: 'contain' }} />
             </div>
+            <p className="text-xs text-slate-500 leading-relaxed mb-6">
+              Customers pay in installments. You get paid upfront — zero collection risk.
+            </p>
             <div className="flex items-baseline gap-2">
-              <span className="rate text-4xl font-black" style={{ color: '#c2410c' }}>₱20</span>
-              <span className="text-lg font-medium text-slate-400">– ₱25 flat</span>
+              <span className="rate text-4xl font-black" style={{ color: '#16a34a' }}>1.5%</span>
+              <span className="text-lg font-medium text-slate-400">per txn</span>
             </div>
           </BentoCard>
-
-          {/* Billease — full width */}
-          <div
-            className="md:col-span-12 reveal d600 rounded-3xl p-9 flex flex-col md:flex-row md:items-center md:justify-between gap-8 relative overflow-hidden"
-            style={{ background: 'linear-gradient(135deg, #05b8b6 0%, #025eb2 100%)', border: 'none' }}
-          >
-            <div>
-              <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: 'rgba(255,255,255,.7)' }}>Buy Now, Pay Later</p>
-              {/* Billease logo in white pill */}
-              <div className="inline-flex items-center px-4 py-2 rounded-xl mb-4" style={{ background: 'white' }}>
-                <Image src="/logos/billease.png" alt="Billease" width={120} height={36} style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
-              </div>
-              <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,.5)', maxWidth: '58ch' }}>
-                Let customers split purchases into installments. Billease absorbs the credit risk — you receive the full amount upfront. The Philippines&apos; leading BNPL provider.
-              </p>
-            </div>
-            <div className="flex flex-col items-start md:items-end gap-2 shrink-0">
-              <div className="flex items-baseline gap-2">
-                <span className="rate text-4xl font-black" style={{ color: '#05b8b6' }}>1.5%</span>
-                <span className="text-lg font-medium" style={{ color: 'rgba(255,255,255,.4)' }}>per transaction</span>
-              </div>
-              <p className="text-xs" style={{ color: 'rgba(255,255,255,.3)' }}>You get paid upfront · zero collection risk</p>
-            </div>
-          </div>
 
         </div>
       </div>

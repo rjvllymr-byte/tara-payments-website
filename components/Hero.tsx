@@ -65,7 +65,7 @@ export default function Hero() {
                 'GCash, Maya, ShopeePay & GrabPay',
                 'QRPH, Credit & Debit Cards',
                 'Direct Debit — BPI, RCBC, UnionBank & Chinabank',
-                'Cebuana Lhuillier, LBC & Billease Pay Later',
+                'Billease Buy Now Pay Later',
               ].map((item) => (
                 <li key={item} className="flex items-center gap-2.5 text-sm text-slate-600">
                   <CheckCircle />

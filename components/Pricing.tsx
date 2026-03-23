@@ -53,13 +53,7 @@ const rateGroups: RateGroup[] = [
       { label: 'BPI · UnionBank · RCBC · Chinabank', rate: '1% or ₱15', note: 'Whichever is higher' },
     ],
   },
-  {
-    category: 'Over-the-Counter',
-    color: '#c2410c',
-    rows: [
-      { label: 'Cebuana · LBC', rate: '₱25 flat' },
-    ],
-  },
+
   {
     category: 'Buy Now Pay Later',
     color: '#16a34a',
