@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Privacy Policy — TaraPayments | Xendit GoHighLevel Integration',
-  description: 'How TaraPayments, the Xendit GoHighLevel integration for the Philippines, collects, uses, and protects your personal information.',
+  title: 'Privacy Policy — TaraPayments | Xendit CRM Integration',
+  description: 'How TaraPayments, the Xendit CRM integration for the Philippines, collects, uses, and protects your personal information.',
   alternates: {
     canonical: '/privacy',
   },
@@ -46,13 +46,13 @@ export default function PrivacyPolicy() {
           style={{ background: 'white', border: '1px solid #e2e8f0' }}
         >
           <Section title="1. Introduction">
-            <p>TaraPayments ("we", "our", or "us") is a Philippine payment gateway integration built for GoHighLevel users. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service. Please read this policy carefully. If you disagree with its terms, please discontinue use of the service.</p>
+            <p>TaraPayments ("we", "our", or "us") is a Philippine payment gateway integration built for your CRM users. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our service. Please read this policy carefully. If you disagree with its terms, please discontinue use of the service.</p>
           </Section>
 
           <Section title="2. Information we collect">
             <p>We may collect the following types of information:</p>
             <ul>
-              <li><strong>Account information</strong> — Name, email address, business name, and GoHighLevel account details provided during onboarding.</li>
+              <li><strong>Account information</strong> — Name, email address, business name, and your CRM account details provided during onboarding.</li>
               <li><strong>Payment credentials</strong> — Your Xendit API keys, which are encrypted at rest and never exposed client-side.</li>
               <li><strong>Transaction data</strong> — Payment amounts, method used, timestamps, and transaction status forwarded from Xendit's infrastructure.</li>
               <li><strong>Usage data</strong> — Log data, IP addresses, browser type, and pages accessed within the TaraPayments dashboard.</li>
@@ -64,7 +64,7 @@ export default function PrivacyPolicy() {
             <p>We use the information we collect to:</p>
             <ul>
               <li>Process and route payments through Xendit's BSP-regulated infrastructure</li>
-              <li>Trigger GoHighLevel automations and workflow events on successful payments</li>
+              <li>Trigger your CRM automations and workflow events on successful payments</li>
               <li>Send payment receipts and transaction notifications</li>
               <li>Provide customer support and respond to inquiries</li>
               <li>Monitor service performance, detect fraud, and ensure security</li>
@@ -77,7 +77,7 @@ export default function PrivacyPolicy() {
             <p>We do not sell your personal information. We may share data with:</p>
             <ul>
               <li><strong>Xendit</strong> — Our payment infrastructure partner. All transactions are processed through Xendit's BSP-licensed platform. Xendit's own privacy policy governs their data handling.</li>
-              <li><strong>GoHighLevel</strong> — Payment events and contact data are transmitted to your GHL account via webhooks per your configuration.</li>
+              <li><strong>your CRM</strong> — Payment events and contact data are transmitted to your GHL account via webhooks per your configuration.</li>
               <li><strong>Service providers</strong> — Third-party vendors who assist with hosting, monitoring, and support, bound by confidentiality agreements.</li>
               <li><strong>Legal authorities</strong> — When required by law, court order, or BSP/government directive.</li>
             </ul>
@@ -116,7 +116,7 @@ export default function PrivacyPolicy() {
           </Section>
 
           <Section title="9. Third-party links">
-            <p>Our service may contain links to third-party websites including GoHighLevel and Xendit. We are not responsible for the privacy practices of those sites and encourage you to review their respective privacy policies.</p>
+            <p>Our service may contain links to third-party websites including your CRM and Xendit. We are not responsible for the privacy practices of those sites and encourage you to review their respective privacy policies.</p>
           </Section>
 
           <Section title="10. Children's privacy">

@@ -39,7 +39,7 @@ export default function Hero() {
                 style={{ background: '#05b8b6', display: 'inline-block' }}
               />
               <span className="text-xs font-semibold" style={{ color: '#05b8b6' }}>
-                Now live on GoHighLevel Marketplace
+                Now live on the CRM Marketplace
               </span>
             </div>
 
@@ -48,14 +48,14 @@ export default function Hero() {
               style={{ fontSize: 'clamp(2.8rem,6vw,5rem)', fontWeight: 900 }}
             >
               Philippine<br />payments,<br />
-              <span style={{ color: '#05b8b6' }}>inside GHL.</span>
+              <span style={{ color: '#05b8b6' }}>inside your CRM.</span>
             </h1>
 
             <p
               className="text-lg leading-relaxed mb-10 reveal d200"
               style={{ color: '#64748b', maxWidth: '52ch' }}
             >
-              Meet TaraPayments, a payment gateway built for GoHighLevel users in the Philippines. Accept GCash,
+              Meet TaraPayments, a payment gateway built for CRM users in the Philippines. Accept GCash,
               Maya, QRPH, credit cards, and more — right inside your funnels and order pages.
             </p>
 
@@ -82,7 +82,7 @@ export default function Hero() {
                 style={{ background: '#05b8b6', color: 'white', padding: '14px 28px', borderRadius: 14 }}
               >
                 <ArrowRight />
-                Install on GoHighLevel
+                Install on Your CRM
               </a>
               <a
                 href="#payment-methods"

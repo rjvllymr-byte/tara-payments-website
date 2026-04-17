@@ -33,7 +33,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-xs leading-relaxed text-slate-400" style={{ maxWidth: '36ch' }}>
-              Philippine payment gateway for GoHighLevel. Powered by Xendit&apos;s BSP-regulated infrastructure.
+              Philippine payment gateway for your CRM. Powered by Xendit&apos;s BSP-regulated infrastructure.
             </p>
 
           </div>

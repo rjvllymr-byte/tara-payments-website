@@ -18,7 +18,7 @@ const jsonLd = {
       '@id': 'https://payments.taraai.ph/#website',
       url: 'https://payments.taraai.ph',
       name: 'TaraPayments',
-      description: 'Xendit GoHighLevel integration for Philippine payments',
+      description: 'Xendit CRM integration for Philippine payments',
     },
     {
       '@type': 'SoftwareApplication',
@@ -27,7 +27,7 @@ const jsonLd = {
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Web',
       description:
-        'TaraPayments is the leading Xendit GoHighLevel integration that lets Philippine businesses accept GCash, Maya, QRPH, credit cards, and more inside GoHighLevel funnels.',
+        'TaraPayments is the leading Xendit CRM integration that lets Philippine businesses accept GCash, Maya, QRPH, credit cards, and more inside their CRM funnels.',
       url: 'https://payments.taraai.ph',
       offers: {
         '@type': 'Offer',
@@ -54,15 +54,15 @@ const jsonLd = {
           name: 'What is TaraPayments?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TaraPayments is a Xendit GoHighLevel integration that enables Philippine businesses to accept GCash, Maya, QRPH, credit cards, and other local payment methods directly inside GoHighLevel.',
+            text: 'TaraPayments is a Xendit CRM integration that enables Philippine businesses to accept GCash, Maya, QRPH, credit cards, and other local payment methods directly inside their CRM.',
           },
         },
         {
           '@type': 'Question',
-          name: 'How does the Xendit GoHighLevel integration work?',
+          name: 'How does the Xendit CRM integration work?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'TaraPayments connects your Xendit merchant account to GoHighLevel, routing payments through Xendit\'s BSP-regulated infrastructure and triggering GHL automations on successful transactions.',
+            text: 'TaraPayments connects your Xendit merchant account to your CRM, routing payments through Xendit\'s BSP-regulated infrastructure and triggering CRM automations on successful transactions.',
           },
         },
         {

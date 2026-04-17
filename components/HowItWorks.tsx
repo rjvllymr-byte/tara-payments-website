@@ -20,16 +20,16 @@ export default function HowItWorks() {
               <StepBadge n={1} color="#05b8b6" />
               <h3 className="text-xl font-bold text-slate-900 mb-3">Install from the Marketplace</h3>
               <p className="text-sm text-slate-500 leading-relaxed mb-7">
-                Search "TaraPayments" inside your GoHighLevel account&apos;s Marketplace tab. Click install — no code, no developer required.
+                Search "TaraPayments" inside your CRM Marketplace tab. Click install — no code, no developer required.
               </p>
               {/* GHL card mockup */}
               <div className="rounded-2xl p-4" style={{ background: 'white', border: '1px solid #e2e8f0' }}>
                 <div className="flex items-center gap-3.5">
                   <div className="w-11 h-11 rounded-xl overflow-hidden shrink-0 flex items-center justify-center" style={{ background: '#092750' }}>
-                    <Image src="/logos/highlevel.png" alt="GoHighLevel" width={44} height={44} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 10 }} />
+                    <Image src="/logos/highlevel.png" alt="CRM Marketplace" width={44} height={44} style={{ width: 44, height: 44, objectFit: 'cover', borderRadius: 10 }} />
                   </div>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-slate-900">GoHighLevel Marketplace</p>
+                    <p className="text-sm font-bold text-slate-900">CRM Marketplace</p>
                     <p className="text-xs text-slate-400 mt-0.5">TaraPayments · Philippine Payments</p>
                   </div>
                   <div
@@ -65,7 +65,7 @@ export default function HowItWorks() {
                 <div>
                   <h3 className="text-xl font-bold text-slate-900 mb-2">Add to your funnels and collect</h3>
                   <p className="text-sm text-slate-500 leading-relaxed">
-                    Select TaraPayments as your payment provider in any GHL funnel, form, or order page. Customers instantly see
+                    Select TaraPayments as your payment provider in any CRM funnel, form, or order page. Customers instantly see
                     all Philippine payment options at checkout — GCash, cards, QRPH, and more.
                   </p>
                 </div>

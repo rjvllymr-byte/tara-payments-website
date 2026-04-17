@@ -9,31 +9,29 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: 'TaraPayments — Xendit GoHighLevel Integration for Philippine Payments',
+  title: 'TaraPayments — Xendit CRM Integration for Philippine Payments',
   description:
-    'The #1 Xendit GoHighLevel integration for the Philippines. Accept GCash, Maya, QRPH, credit cards, and every major Philippine payment method directly inside GoHighLevel. Built for Filipino agencies and coaches.',
+    'The #1 Xendit CRM integration for the Philippines. Accept GCash, Maya, QRPH, credit cards, and every major Philippine payment method directly inside your CRM. Built for Filipino agencies and coaches.',
   keywords: [
-    'xendit gohighlevel integration',
-    'Xendit GoHighLevel',
-    'GoHighLevel Philippine payments',
+    'xendit crm integration',
+    'Xendit CRM Philippines',
+    'CRM Philippine payments',
     'GCash payment gateway',
     'Maya payment gateway',
     'QRPH',
     'Philippines payment gateway',
-    'GHL Philippines',
     'xendit integration philippines',
-    'gohighlevel payments philippines',
-    'GCash GoHighLevel',
-    'Philippine payment gateway GoHighLevel',
+    'CRM payments philippines',
+    'Philippine payment gateway CRM',
   ],
   metadataBase: new URL('https://payments.taraai.ph'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'TaraPayments — Xendit GoHighLevel Integration for Philippine Payments',
+    title: 'TaraPayments — Xendit CRM Integration for Philippine Payments',
     description:
-      'The #1 Xendit GoHighLevel integration. Accept GCash, Maya, QRPH, cards, and more inside your funnels. Built for Filipino agencies and coaches.',
+      'The #1 Xendit CRM integration. Accept GCash, Maya, QRPH, cards, and more inside your funnels. Built for Filipino agencies and coaches.',
     type: 'website',
     url: 'https://payments.taraai.ph',
     siteName: 'TaraPayments',
@@ -42,15 +40,15 @@ export const metadata: Metadata = {
         url: '/tara-payments.png',
         width: 1200,
         height: 630,
-        alt: 'TaraPayments — Xendit GoHighLevel Integration',
+        alt: 'TaraPayments — Xendit CRM Integration',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'TaraPayments — Xendit GoHighLevel Integration for Philippine Payments',
+    title: 'TaraPayments — Xendit CRM Integration for Philippine Payments',
     description:
-      'The #1 Xendit GoHighLevel integration. Accept GCash, Maya, QRPH, cards, and more inside your funnels.',
+      'The #1 Xendit CRM integration. Accept GCash, Maya, QRPH, cards, and more inside your funnels.',
     images: ['/tara-payments.png'],
   },
   robots: {

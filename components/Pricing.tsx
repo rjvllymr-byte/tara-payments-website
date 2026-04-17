@@ -1,12 +1,12 @@
 const features = [
   'All Philippine payment methods',
-  'Native GoHighLevel integration',
+  'Native CRM integration',
   'Funnel Checkout Pages',
   'Invoice Generation',
   'Payment Links for Easy Transactions',
   'Supports One-Time and Recurring Payments',
-  'Automatic GHL workflow triggers',
-  'GHL contact tagging on payment',
+  'Automatic CRM workflow triggers',
+  'CRM contact tagging on payment',
   'Real-time transaction dashboard',
   'Detailed transaction reports & exports',
   'Payment receipts & failed-payment retry',
@@ -141,7 +141,7 @@ export default function Pricing() {
                   textDecoration: 'none',
                 }}
               >
-                Install from GHL Marketplace
+                Install from CRM Marketplace
               </a>
               <p className="text-xs text-center mt-3" style={{ color: 'rgba(255,255,255,.3)' }}>
                 Cancel anytime · No long-term contracts

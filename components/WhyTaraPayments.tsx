@@ -6,8 +6,8 @@ const benefits = [
     border: 'right bottom',
   },
   {
-    title: 'GHL Workflow Triggers',
-    body: 'Every successful payment fires a webhook to GHL in real time — tagging contacts, enrolling in courses, or kicking off onboarding sequences automatically.',
+    title: 'CRM Workflow Triggers',
+    body: 'Every successful payment fires a webhook to your CRM in real time — tagging contacts, enrolling in courses, or kicking off onboarding sequences automatically.',
     icon: <TriggerIcon />,
     border: 'right bottom',
   },
@@ -25,7 +25,7 @@ const benefits = [
   },
   {
     title: 'Failed Payment Recovery',
-    body: 'Automatic retry logic and payment-link re-sends via GHL SMS or email when a transaction does not complete on the first attempt.',
+    body: 'Automatic retry logic and payment-link re-sends via CRM SMS or email when a transaction does not complete on the first attempt.',
     icon: <RetryIcon />,
     border: 'right',
   },
@@ -47,7 +47,7 @@ export default function WhyTaraPayments() {
             Why TaraPayments
           </p>
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900">
-            Built for Filipino<br />GHL users and businesses.
+            Built for Filipino<br />CRM users and businesses.
           </h2>
         </div>
 

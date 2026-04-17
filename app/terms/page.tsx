@@ -2,8 +2,8 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Terms of Service — TaraPayments | Xendit GoHighLevel Integration',
-  description: 'Terms and conditions governing the use of TaraPayments, the Xendit GoHighLevel integration for Philippine payment processing.',
+  title: 'Terms of Service — TaraPayments | Xendit CRM Integration',
+  description: 'Terms and conditions governing the use of TaraPayments, the Xendit CRM integration for Philippine payment processing.',
   alternates: {
     canonical: '/terms',
   },
@@ -50,7 +50,7 @@ export default function TermsOfService() {
           </Section>
 
           <Section title="2. Description of service">
-            <p>TaraPayments is a GoHighLevel Marketplace application that enables Philippine-based businesses to accept local payment methods — including GCash, Maya, ShopeePay, GrabPay, QRPH, credit and debit cards, direct debit, over-the-counter payments, and Billease Buy Now Pay Later — through your GoHighLevel funnels, order pages, and forms.</p>
+            <p>TaraPayments is a your CRM Marketplace application that enables Philippine-based businesses to accept local payment methods — including GCash, Maya, ShopeePay, GrabPay, QRPH, credit and debit cards, direct debit, over-the-counter payments, and Billease Buy Now Pay Later — through your your CRM funnels, order pages, and forms.</p>
             <p>TaraPayments is powered by Xendit's BSP-regulated payment infrastructure. By using TaraPayments, you also agree to Xendit's applicable terms of service and are responsible for maintaining a valid, verified Xendit Philippines merchant account.</p>
           </Section>
 
@@ -58,7 +58,7 @@ export default function TermsOfService() {
             <p>To use TaraPayments you must:</p>
             <ul>
               <li>Be at least 18 years of age</li>
-              <li>Have a valid GoHighLevel account</li>
+              <li>Have a valid your CRM account</li>
               <li>Have a verified Xendit Philippines merchant account</li>
               <li>Be operating a lawful business in the Philippines or serving Philippine customers</li>
               <li>Provide accurate and complete registration information</li>
@@ -66,7 +66,7 @@ export default function TermsOfService() {
           </Section>
 
           <Section title="4. Subscription and billing">
-            <p>TaraPayments is offered at <strong>$39 USD per month</strong>, billed monthly through your GoHighLevel account. The following terms apply:</p>
+            <p>TaraPayments is offered at <strong>$39 USD per month</strong>, billed monthly through your your CRM account. The following terms apply:</p>
             <ul>
               <li>Subscriptions begin on the date of installation and renew automatically each month</li>
               <li>You may cancel at any time; cancellation takes effect at the end of the current billing period</li>
@@ -77,7 +77,7 @@ export default function TermsOfService() {
           </Section>
 
           <Section title="5. Payment processing">
-            <p>All payment transactions are processed by Xendit, a BSP-licensed payment service provider. TaraPayments acts as the integration layer between GoHighLevel and Xendit. Accordingly:</p>
+            <p>All payment transactions are processed by Xendit, a BSP-licensed payment service provider. TaraPayments acts as the integration layer between your CRM platform and Xendit. Accordingly:</p>
             <ul>
               <li>Transaction fees are governed by Xendit's published rates and your Xendit merchant agreement</li>
               <li>Settlements are made directly to your registered bank account by Xendit</li>
@@ -110,7 +110,7 @@ export default function TermsOfService() {
 
           <Section title="8. Intellectual property">
             <p>All content, branding, software, and materials associated with TaraPayments are the property of TaraPayments and are protected by applicable intellectual property laws. You may not copy, modify, distribute, or create derivative works without our express written permission.</p>
-            <p>GoHighLevel and Xendit are trademarks of their respective owners. TaraPayments is not affiliated with or endorsed by GoHighLevel or Xendit beyond the authorized integrations described herein.</p>
+            <p>your CRM platform and Xendit are trademarks of their respective owners. TaraPayments is not affiliated with or endorsed by your CRM or Xendit beyond the authorized integrations described herein.</p>
           </Section>
 
           <Section title="9. Limitation of liability">
@@ -118,7 +118,7 @@ export default function TermsOfService() {
             <ul>
               <li>Any indirect, incidental, special, consequential, or punitive damages</li>
               <li>Loss of revenue, profits, or business opportunities</li>
-              <li>Failures, delays, or errors caused by Xendit, GoHighLevel, or third-party payment networks</li>
+              <li>Failures, delays, or errors caused by Xendit, your CRM, or third-party payment networks</li>
               <li>Unauthorized access to your account resulting from your failure to maintain credential security</li>
             </ul>
             <p>Our total aggregate liability to you for any claims arising out of or related to these Terms shall not exceed the amount you paid to us in the three (3) months preceding the claim.</p>

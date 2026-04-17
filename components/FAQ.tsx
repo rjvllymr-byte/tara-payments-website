@@ -4,23 +4,23 @@ const faqs = [
     a: "Yes. TaraPayments is built on Xendit's Philippine payment infrastructure. You need a verified Xendit Philippines merchant account — signing up is free, and you only pay when transactions succeed.",
   },
   {
-    q: 'Is TaraPayments officially listed on GoHighLevel Marketplace?',
-    a: 'Yes. TaraPayments is a verified app in the GoHighLevel Marketplace. Search "TaraPayments" inside your GHL account to install it — no external redirects, no manual configuration.',
+    q: 'Is TaraPayments officially listed on the CRM Marketplace?',
+    a: 'Yes. TaraPayments is a verified app in the CRM Marketplace. Search "TaraPayments" inside your CRM account to install it — no external redirects, no manual configuration.',
   },
   {
-    q: 'How does payment triggering work with GHL automations?',
-    a: 'Every successful payment fires a real-time webhook into GoHighLevel, which you can use to trigger any automation — tag a contact, enroll in a course, send a receipt email, start an onboarding sequence, or update a pipeline stage.',
+    q: 'How does payment triggering work with CRM automations?',
+    a: 'Every successful payment fires a real-time webhook into your CRM, which you can use to trigger any automation — tag a contact, enroll in a course, send a receipt email, start an onboarding sequence, or update a pipeline stage.',
   },
   {
     q: 'What currency do customers pay in?',
-    a: 'All checkout transactions are in Philippine Peso (₱ PHP). Settlements go directly to your Philippine bank account via Xendit. The $39/month subscription is charged in USD through GoHighLevel.',
+    a: 'All checkout transactions are in Philippine Peso (₱ PHP). Settlements go directly to your Philippine bank account via Xendit. The $39/month subscription is charged in USD through your CRM.',
   },
   {
     q: 'Are there transaction volume limits?',
     a: 'TaraPayments imposes no volume caps. Standard Xendit limits apply based on your merchant verification tier. Full verification typically unlocks higher limits within 3–5 business days.',
   },
   {
-    q: 'Does TaraPayments work with GHL sub-accounts?',
+    q: 'Does TaraPayments work with CRM sub-accounts?',
     a: 'Yes. Agency owners can install TaraPayments at the agency level and configure it per sub-account. Each sub-account can link its own Xendit credentials for separate settlements.',
   },
   {
