@@ -34,11 +34,13 @@ export default function CTASection() {
           className="text-base leading-relaxed mb-10 mx-auto"
           style={{ color: 'rgba(255,255,255,.75)', maxWidth: '44ch' }}
         >
-          Install TaraPayments from the CRM Marketplace and accept your first Philippine payment today.
+          Install TaraPayments from the GoHighLevel Marketplace and accept your first Philippine payment today.
         </p>
         <div className="flex flex-wrap items-center justify-center gap-4">
           <a
-            href="#"
+            href="https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84"
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 font-bold transition-all hover:opacity-90 active:scale-95"
             style={{
               background: 'white',
@@ -52,7 +54,7 @@ export default function CTASection() {
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M9 2v11M4 9l5 5 5-5" stroke="#025eb2" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Install on Your CRM — $39/mo
+            Install on GoHighLevel — $39/mo
           </a>
         </div>
         <p className="mt-5 text-xs" style={{ color: 'rgba(255,255,255,.5)' }}>

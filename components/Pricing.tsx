@@ -1,12 +1,12 @@
 const features = [
   'All Philippine payment methods',
-  'Native CRM integration',
+  'Native GoHighLevel integration',
   'Funnel Checkout Pages',
   'Invoice Generation',
   'Payment Links for Easy Transactions',
   'Supports One-Time and Recurring Payments',
-  'Automatic CRM workflow triggers',
-  'CRM contact tagging on payment',
+  'Automatic GoHighLevel workflow triggers',
+  'GoHighLevel contact tagging on payment',
   'Real-time transaction dashboard',
   'Detailed transaction reports & exports',
   'Payment receipts & failed-payment retry',
@@ -131,7 +131,9 @@ export default function Pricing() {
               </ul>
 
               <a
-                href="#"
+                href="https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block w-full text-center font-bold text-sm transition-opacity hover:opacity-90 active:scale-95"
                 style={{
                   background: 'white',
@@ -141,7 +143,7 @@ export default function Pricing() {
                   textDecoration: 'none',
                 }}
               >
-                Install from CRM Marketplace
+                Install from GHL Marketplace
               </a>
               <p className="text-xs text-center mt-3" style={{ color: 'rgba(255,255,255,.3)' }}>
                 Cancel anytime · No long-term contracts

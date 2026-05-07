@@ -20,10 +20,10 @@ export default function PaymentMethods() {
               Payment Methods
             </p>
             <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900 mb-5">
-              Every Filipino<br />payment, covered.
+              Every local<br />payment, covered.
             </h2>
             <p className="text-base leading-relaxed text-slate-500 mb-6" style={{ maxWidth: '52ch' }}>
-              From GCash to Cebuana, your customers pay how they prefer. One integration gives you
+              From GCash to Direct Debits, your customers pay how they prefer. One integration gives you
               access to all local Philippine payment channels.
             </p>
             <div

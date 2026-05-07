@@ -39,7 +39,7 @@ export default function Hero() {
                 style={{ background: '#05b8b6', display: 'inline-block' }}
               />
               <span className="text-xs font-semibold" style={{ color: '#05b8b6' }}>
-                Now live on the CRM Marketplace
+                Now live on GoHighLevel Marketplace
               </span>
             </div>
 
@@ -48,15 +48,15 @@ export default function Hero() {
               style={{ fontSize: 'clamp(2.8rem,6vw,5rem)', fontWeight: 900 }}
             >
               Philippine<br />payments,<br />
-              <span style={{ color: '#05b8b6' }}>inside your CRM.</span>
+              <span style={{ color: '#05b8b6' }}>inside GoHighLevel.</span>
             </h1>
 
             <p
               className="text-lg leading-relaxed mb-10 reveal d200"
               style={{ color: '#64748b', maxWidth: '52ch' }}
             >
-              Meet TaraPayments, a payment gateway built for CRM users in the Philippines. Accept GCash,
-              Maya, QRPH, credit cards, and more — right inside your funnels and order pages.
+              The Xendit GoHighLevel integration built for the Philippines. Accept GCash, Maya, QRPH,
+              credit cards, and more — right inside your funnels and order pages.
             </p>
 
             {/* Checklist */}
@@ -77,12 +77,14 @@ export default function Hero() {
             {/* CTAs */}
             <div className="flex flex-wrap gap-4 reveal d400">
               <a
-                href="#pricing"
+                href="https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 font-bold text-sm transition-opacity hover:opacity-90 active:scale-95"
                 style={{ background: '#05b8b6', color: 'white', padding: '14px 28px', borderRadius: 14 }}
               >
                 <ArrowRight />
-                Install on Your CRM
+                Install on GoHighLevel
               </a>
               <a
                 href="#payment-methods"
