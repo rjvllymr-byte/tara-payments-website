@@ -101,7 +101,7 @@ export default function Hero() {
             </div>
 
             <p className="mt-5 text-xs reveal d500" style={{ color: '#94a3b8' }}>
-              $39/month · No setup fee · Cancel anytime
+              Free Download · No setup fee · Cancel anytime
             </p>
           </div>
 

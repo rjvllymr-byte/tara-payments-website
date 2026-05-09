@@ -54,7 +54,7 @@ export default function CTASection() {
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
               <path d="M9 2v11M4 9l5 5 5-5" stroke="#025eb2" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
-            Install on GoHighLevel — $39/mo
+            Install on GoHighLevel — Free Download
           </a>
         </div>
         <p className="mt-5 text-xs" style={{ color: 'rgba(255,255,255,.5)' }}>

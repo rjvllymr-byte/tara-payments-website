@@ -12,9 +12,7 @@ const features = [
   'Payment receipts & failed-payment retry',
   'Instant payment confirmation emails',
   'One-click refunds',
-  'Custom Branding',
   'Sub-account management',
-  'Priority support',
   'No transaction volume caps',
 ]
 
@@ -105,13 +103,9 @@ export default function Pricing() {
               </div>
 
               <div className="mb-9">
-                <div className="flex items-start gap-1">
-                  <span className="text-xl font-bold text-white mt-2">$</span>
-                  <span className="rate font-black text-white" style={{ fontSize: '4.5rem', lineHeight: 1, letterSpacing: '-.04em' }}>
-                    39
-                  </span>
-                </div>
-                <p className="text-sm mt-2" style={{ color: 'rgba(255,255,255,.4)' }}>per month, billed monthly</p>
+                <span className="font-black text-white" style={{ fontSize: '3rem', lineHeight: 1, letterSpacing: '-.04em' }}>
+                  Free Download
+                </span>
               </div>
 
               <ul className="flex flex-col gap-3.5 mb-9">

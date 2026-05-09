@@ -98,7 +98,7 @@ export default function Nav() {
                 whiteSpace: 'nowrap',
               }}
             >
-              Get Started — $39/mo
+              Get Started — Free
             </a>
           </div>
 

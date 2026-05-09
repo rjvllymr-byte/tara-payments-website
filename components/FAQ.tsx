@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: 'What currency do customers pay in?',
-    a: 'All checkout transactions are in Philippine Peso (₱ PHP). Settlements go directly to your Philippine bank account via Xendit. The $39/month subscription is charged in USD through GoHighLevel.',
+    a: 'All checkout transactions are in Philippine Peso (₱ PHP). Settlements go directly to your Philippine bank account via Xendit. TaraPayments is free to download — you only pay Xendit\'s transaction fees per successful payment.',
   },
   {
     q: 'Are there transaction volume limits?',
