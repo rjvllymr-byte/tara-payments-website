@@ -32,12 +32,15 @@ export default function HowItWorks() {
                     <p className="text-sm font-bold text-slate-900">GoHighLevel Marketplace</p>
                     <p className="text-xs text-slate-400 mt-0.5">TaraPayments · Philippine Payments</p>
                   </div>
-                  <div
-                    className="px-3 py-1.5 rounded-lg text-xs font-bold shrink-0"
-                    style={{ background: '#05b8b6', color: '#092750' }}
+                  <a
+                    href="https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-3 py-1.5 rounded-lg text-xs font-bold shrink-0 hover:opacity-90 transition-opacity"
+                    style={{ background: '#05b8b6', color: '#092750', textDecoration: 'none' }}
                   >
                     Install
-                  </div>
+                  </a>
                 </div>
               </div>
             </div>

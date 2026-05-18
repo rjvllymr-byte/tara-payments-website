@@ -1,21 +1,3 @@
-const features = [
-  'All Philippine payment methods',
-  'Native GoHighLevel integration',
-  'Funnel Checkout Pages',
-  'Invoice Generation',
-  'Payment Links for Easy Transactions',
-  'Supports One-Time and Recurring Payments',
-  'Automatic GoHighLevel workflow triggers',
-  'GoHighLevel contact tagging on payment',
-  'Real-time transaction dashboard',
-  'Detailed transaction reports & exports',
-  'Payment receipts & failed-payment retry',
-  'Instant payment confirmation emails',
-  'One-click refunds',
-  'Sub-account management',
-  'No transaction volume caps',
-]
-
 type RateRow = { label: string; rate: string; note?: string }
 type RateGroup = { category: string; color: string; rows: RateRow[] }
 
@@ -51,7 +33,6 @@ const rateGroups: RateGroup[] = [
       { label: 'BPI · UnionBank · RCBC · Chinabank', rate: '1% or ₱15', note: 'Whichever is higher' },
     ],
   },
-
   {
     category: 'Buy Now Pay Later',
     color: '#16a34a',
@@ -60,6 +41,74 @@ const rateGroups: RateGroup[] = [
     ],
   },
 ]
+
+type PlanFeature = string
+type Plan = {
+  name: string
+  price: string
+  priceSub: string
+  description: string
+  features: PlanFeature[]
+  cta: string
+  ctaHref: string
+  highlight: boolean
+}
+
+const plans: Plan[] = [
+  {
+    name: 'TaraPayments Free',
+    price: '$0',
+    priceSub: 'forever',
+    description: 'Get started with Philippine payments inside your CRM — no upfront cost.',
+    features: [
+      'E-Wallets and Direct Debit',
+      'Native CRM integration',
+      'Supports One-Time and Recurring Payments',
+      'One-click refunds (E-Wallets only)',
+    ],
+    cta: 'Install Free',
+    ctaHref: 'https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84',
+    highlight: false,
+  },
+  {
+    name: 'TaraPayments Pro',
+    price: '$39',
+    priceSub: '/month',
+    description: 'The full TaraPayments suite for growing businesses running on CRM.',
+    features: [
+      'Everything in Free, and:',
+      'Credit Card / Debit Cards, PayLater* payments',
+      'Priority support',
+      'No transaction volume caps',
+      'Custom Branding',
+    ],
+    cta: 'Get Started',
+    ctaHref: 'https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84',
+    highlight: true,
+  },
+  {
+    name: 'TaraPayments Agency Plan',
+    price: 'Let\'s talk',
+    priceSub: '',
+    description: 'Built for agencies managing multiple client sub-accounts at scale.',
+    features: [
+      'Includes all from Pro',
+      'Works with SaaS Configurator',
+      'Can Enable Rebilling',
+    ],
+    cta: 'Talk to Us',
+    ctaHref: 'https://api.leadconnectorhq.com/widget/booking/cbnYq671Xb3JFvCfmYMh',
+    highlight: false,
+  },
+]
+
+function CheckIcon() {
+  return (
+    <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+      <path d="M2 5l2 2 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
 export default function Pricing() {
   return (
@@ -70,138 +119,176 @@ export default function Pricing() {
         <div className="mb-16 reveal">
           <p className="text-xs font-bold tracking-widest uppercase mb-3" style={{ color: '#05b8b6' }}>Pricing</p>
           <h2 className="text-4xl md:text-5xl font-black tracking-tighter leading-none text-slate-900 mb-5">
-            One plan.<br />All payment methods.
+            Simple, transparent<br />pricing.
           </h2>
           <p className="text-base text-slate-500 leading-relaxed" style={{ maxWidth: '50ch' }}>
-            A flat monthly subscription gives you every payment channel. Transaction fees are Xendit's published rates — you only pay when payments succeed.
+            Start free and scale up as you grow. Transaction fees are Xendit&apos;s published rates — you only pay when payments succeed.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-
-          {/* ── Plan card ── */}
-          <div className="lg:col-span-4 reveal d100">
+        {/* Pricing cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10 reveal d100">
+          {plans.map((plan) => (
             <div
-              className="rounded-3xl p-9 relative overflow-hidden"
-              style={{ background: 'linear-gradient(145deg, #05b8b6 0%, #025eb2 100%)', border: 'none' }}
+              key={plan.name}
+              className="rounded-3xl p-8 relative overflow-hidden flex flex-col"
+              style={
+                plan.highlight
+                  ? { background: 'linear-gradient(145deg, #05b8b6 0%, #025eb2 100%)' }
+                  : { background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(9,39,80,.07)' }
+              }
             >
-              {/* Glow blob */}
-              <div
-                className="absolute top-0 right-0 pointer-events-none"
-                style={{
-                  width: 220, height: 220,
-                  background: 'radial-gradient(circle, rgba(5,184,182,.1) 0%, transparent 70%)',
-                  transform: 'translate(30%,-30%)',
-                }}
-              />
+              {plan.highlight && (
+                <>
+                  {/* Glow blob */}
+                  <div
+                    className="absolute top-0 right-0 pointer-events-none"
+                    style={{
+                      width: 200, height: 200,
+                      background: 'radial-gradient(circle, rgba(5,184,182,.15) 0%, transparent 70%)',
+                      transform: 'translate(30%,-30%)',
+                    }}
+                  />
+                  <div
+                    className="inline-flex items-center gap-2 px-3 py-1 rounded-full mb-6 self-start"
+                    style={{ background: 'rgba(255,255,255,.2)', border: '1px solid rgba(255,255,255,.3)' }}
+                  >
+                    <span className="text-xs font-bold text-white">Most Popular</span>
+                  </div>
+                </>
+              )}
 
-              <div
-                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-7"
-                style={{ background: 'rgba(255,255,255,.2)', border: '1px solid rgba(255,255,255,.3)' }}
+              <p
+                className="text-sm font-bold mb-4"
+                style={{ color: plan.highlight ? 'rgba(255,255,255,.7)' : '#05b8b6' }}
               >
-                <span className="text-xs font-bold text-white">TaraPayments Pro</span>
-              </div>
+                {plan.name}
+              </p>
 
-              <div className="mb-9">
-                <span className="font-black text-white" style={{ fontSize: '3rem', lineHeight: 1, letterSpacing: '-.04em' }}>
-                  Free Download
+              <div className="flex items-end gap-1 mb-2">
+                <span
+                  className="font-black leading-none"
+                  style={{
+                    fontSize: '2.75rem',
+                    letterSpacing: '-.04em',
+                    color: plan.highlight ? 'white' : '#092750',
+                  }}
+                >
+                  {plan.price}
                 </span>
+                {plan.priceSub && (
+                  <span
+                    className="text-sm font-medium pb-1"
+                    style={{ color: plan.highlight ? 'rgba(255,255,255,.6)' : '#94a3b8' }}
+                  >
+                    {plan.priceSub}
+                  </span>
+                )}
               </div>
 
-              <ul className="flex flex-col gap-3.5 mb-9">
-                {features.map((f) => (
+              <p
+                className="text-sm leading-relaxed mb-7"
+                style={{ color: plan.highlight ? 'rgba(255,255,255,.7)' : '#64748b' }}
+              >
+                {plan.description}
+              </p>
+
+              <ul className="flex flex-col gap-3 mb-8 flex-1">
+                {plan.features.map((f) => (
                   <li key={f} className="flex items-center gap-3">
                     <div
                       className="w-5 h-5 rounded-full flex items-center justify-center shrink-0"
-                      style={{ background: 'rgba(255,255,255,.2)' }}
+                      style={
+                        plan.highlight
+                          ? { background: 'rgba(255,255,255,.2)', color: 'white' }
+                          : { background: '#f0fdf9', color: '#05b8b6' }
+                      }
                     >
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5l2 2 4-4" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                      <CheckIcon />
                     </div>
-                    <span className="text-sm text-white">{f}</span>
+                    <span
+                      className="text-sm"
+                      style={{ color: plan.highlight ? 'white' : '#475569' }}
+                    >
+                      {f}
+                    </span>
                   </li>
                 ))}
               </ul>
 
               <a
-                href="https://marketplace.gohighlevel.com/integration/69d23c194b99ed3612dcfd84/versions/69d23c194b99ed3612dcfd84"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={plan.ctaHref}
+                target={plan.ctaHref.startsWith('http') ? '_blank' : undefined}
+                rel={plan.ctaHref.startsWith('http') ? 'noopener noreferrer' : undefined}
                 className="block w-full text-center font-bold text-sm transition-opacity hover:opacity-90 active:scale-95"
-                style={{
-                  background: 'white',
-                  color: '#025eb2',
-                  padding: '16px 0',
-                  borderRadius: 14,
-                  textDecoration: 'none',
-                }}
+                style={
+                  plan.highlight
+                    ? { background: 'white', color: '#025eb2', padding: '15px 0', borderRadius: 12, textDecoration: 'none' }
+                    : { background: 'linear-gradient(135deg, #05b8b6, #025eb2)', color: 'white', padding: '15px 0', borderRadius: 12, textDecoration: 'none' }
+                }
               >
-                Install from GHL Marketplace
+                {plan.cta}
               </a>
-              <p className="text-xs text-center mt-3" style={{ color: 'rgba(255,255,255,.3)' }}>
-                Cancel anytime · No long-term contracts
-              </p>
             </div>
-          </div>
+          ))}
+        </div>
 
-          {/* ── Rates table ── */}
-          <div className="lg:col-span-8 reveal d200">
-            <div
-              className="rounded-3xl overflow-hidden"
-              style={{ background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(9,39,80,.07)' }}
-            >
-              <div className="px-8 py-6" style={{ borderBottom: '1px solid #f1f5f9' }}>
-                <h3 className="text-lg font-bold text-slate-900">Transaction Fees</h3>
-                <p className="text-sm text-slate-400 mt-1">Per successful payment only. Failed transactions are never charged.</p>
-              </div>
+        {/* Transaction rates table */}
+        <div className="reveal d200">
+          <div
+            className="rounded-3xl overflow-hidden"
+            style={{ background: 'white', border: '1px solid #e2e8f0', boxShadow: '0 4px 24px rgba(9,39,80,.07)' }}
+          >
+            <div className="px-8 py-6" style={{ borderBottom: '1px solid #f1f5f9' }}>
+              <h3 className="text-lg font-bold text-slate-900">Transaction Fees</h3>
+              <p className="text-sm text-slate-400 mt-1">Per successful payment only. Failed transactions are never charged.</p>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
               {rateGroups.map(({ category, color, rows }, gi) => (
-                <div key={category} style={gi > 0 ? { borderTop: '1px solid #f1f5f9' } : {}}>
-                  {/* Category header */}
-                  <div className="px-8 py-3 flex items-center gap-2.5" style={{ background: '#f8fafc' }}>
+                <div
+                  key={category}
+                  style={{ borderRight: gi < rateGroups.length - 1 ? '1px solid #f1f5f9' : undefined }}
+                >
+                  <div className="px-6 py-3 flex items-center gap-2" style={{ background: '#f8fafc', borderBottom: '1px solid #f1f5f9' }}>
                     <span className="w-2 h-2 rounded-full shrink-0" style={{ background: color }} />
                     <span className="text-xs font-bold tracking-widest uppercase" style={{ color }}>{category}</span>
                   </div>
-                  {/* Rate rows */}
-                  {rows.map(({ label, rate, note }, ri) => (
-                    <div
-                      key={label}
-                      className="px-8 py-4 flex items-center justify-between"
-                      style={ri < rows.length - 1 ? { borderBottom: '1px solid #f8fafc' } : {}}
-                    >
-                      <p className="text-sm text-slate-600 pr-4">{label}</p>
-                      <div className="text-right shrink-0">
-                        <span className="rate font-black text-base" style={{ color: '#092750' }}>{rate}</span>
-                        {note && <p className="text-xs text-slate-400 mt-0.5">{note}</p>}
-                      </div>
+                  {rows.map(({ label, rate, note }) => (
+                    <div key={label} className="px-6 py-4">
+                      <p className="text-sm text-slate-500 mb-1">{label}</p>
+                      <span className="font-black text-base" style={{ color: '#092750' }}>{rate}</span>
+                      {note && <p className="text-xs text-slate-400 mt-0.5">{note}</p>}
                     </div>
                   ))}
                 </div>
               ))}
+            </div>
 
-              <div className="px-8 py-4 flex items-start gap-2.5" style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
-                <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <circle cx="7" cy="7" r="6.5" stroke="#94a3b8" strokeWidth="1.1" />
-                  <path d="M7 4.5v3.5M7 10v.5" stroke="#94a3b8" strokeWidth="1.1" strokeLinecap="round" />
-                </svg>
-                <p className="text-xs text-slate-400 leading-relaxed">
-                  Rates are Xendit&apos;s published standard pricing — powered by their BSP-regulated infrastructure. Volume discounts may apply.{' '}
-                  <a
-                    href="https://www.xendit.co/en-ph/pricing/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ color: '#025eb2', textDecoration: 'underline' }}
-                  >
-                    Verify current rates at xendit.co
-                  </a>
-                  .
-                </p>
-              </div>
+            <div className="px-8 py-4 flex items-start gap-2.5" style={{ background: '#f8fafc', borderTop: '1px solid #e2e8f0' }}>
+              <svg className="shrink-0 mt-0.5" width="14" height="14" viewBox="0 0 14 14" fill="none">
+                <circle cx="7" cy="7" r="6.5" stroke="#94a3b8" strokeWidth="1.1" />
+                <path d="M7 4.5v3.5M7 10v.5" stroke="#94a3b8" strokeWidth="1.1" strokeLinecap="round" />
+              </svg>
+              <p className="text-xs text-slate-400 leading-relaxed">
+                Rates are Xendit&apos;s published standard pricing — powered by their BSP-regulated infrastructure. Volume discounts may apply.{' '}
+                <a
+                  href="https://www.xendit.co/en-ph/pricing/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ color: '#025eb2', textDecoration: 'underline' }}
+                >
+                  Verify current rates at xendit.co
+                </a>
+                .
+              </p>
             </div>
           </div>
-
+          <p className="text-xs text-slate-400 mt-4">
+            * PayLater availability subject to Xendit merchant approval.
+          </p>
         </div>
+
       </div>
     </section>
   )
